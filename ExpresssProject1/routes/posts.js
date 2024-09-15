@@ -53,7 +53,26 @@ router.get('/:id',(request,respose)=>{
 
 });
 
+router.post('/',(req,res)=>{
+    // res.setHeader('content-type', 'application/json');
+    const {title} = req.body;
+    if(!title)
+    {
+     res.status(400).json({"message":"Title is required"})
+    }else
+    {
+      let newid=posts.length+1;
+      posts.push({
+          id:newid,
+          title:title
+      }) 
 
+      res.status(201).json({
+          id:newid,
+          title:title
+      })
+    }
+})
 
 //module.exports=router
 
