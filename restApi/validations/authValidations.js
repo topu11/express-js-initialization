@@ -1,5 +1,5 @@
 const {isEmail,isValidPassword}=require('../global_helpers')
-const User=require('../models/userModel')
+const UserModel=require('../models/userModel')
 
 async function  authValidation({name,username,email,password})
 { 
@@ -16,14 +16,14 @@ async function  authValidation({name,username,email,password})
            error_message.push(`As Salamu alikum ,Please add One Uppercase , One Special Case in your Password`)
    }else
    {
-      const emailExits=await User.findOne({"email":email});
+      const emailExits=await UserModel.findOne({"email":email});
       if(emailExits)
          {
             is_error=true;
             error_message.push(`As Salamu alikum ,${email} already exits`)  
          }
    }
-   const userExits=await User.findOne({"username":username});
+   const userExits=await UserModel.findOne({"username":username});
   // console.log(userExits);
    if(userExits)
    {

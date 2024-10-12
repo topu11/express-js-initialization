@@ -1,8 +1,8 @@
-const User=require('../../models/userModel')
+const UserModel=require('../../models/userModel')
 const bcrypt=require('bcryptjs');
 const authValidations=require('../../validations/authValidations')
 
-exports.signup=async (req,res,next)=>{
+exports.signupController=async (req,res,next)=>{
     //const validated=JSON.parse(authValidations(req.body));
     //console.log(validated);
     //return;
@@ -20,7 +20,7 @@ exports.signup=async (req,res,next)=>{
          {
             req.body.password=bcrypt.hashSync( req.body.password,11)
             const {name,username,email,password}=req.body;
-            const user=await User.create({
+            const user=await UserModel.create({
                 name,
                 username,
                 email,

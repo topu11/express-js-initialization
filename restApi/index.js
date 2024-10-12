@@ -3,7 +3,7 @@ const dotenv=require('dotenv');
 const bodyParser=require('body-parser');
 
 const connectDB=require('./connectDB/connectDB')
-const sign_up=require('./routes/sign_up_routes')
+const sign_up_route=require('./routes/sign_up_routes')
 dotenv.config();
 
 
@@ -12,7 +12,7 @@ const app=express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/api/signup',sign_up)
+app.use('/api/signup',sign_up_route)
 
 
 app.get('/',(req,res)=>{
