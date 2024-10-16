@@ -2,15 +2,14 @@ const UserModel=require('../../models/userModel')
 const bcrypt=require('bcryptjs');
 const authValidations=require('../../validations/authValidations')
 
-exports.signupController=async (req,res,next)=>{
-    //const validated=JSON.parse(authValidations(req.body));
-    //console.log(validated);
-    //return;
+const signupController=async (req,res,next)=>{
+    
+    const {signupValidation}=authValidations;
+
     try
     { 
-        //const pass=await bcrypt.hash(req.body.password,process.env.SALT);
-         
-        const validated=JSON.parse(await authValidations(req.body));
+        
+        const validated=JSON.parse(await signupValidation(req.body));
         //console.log(validated);
          if(validated.is_error)
          {
@@ -34,14 +33,14 @@ exports.signupController=async (req,res,next)=>{
                 });
             }
          }
-      
-        
-
     }catch(error)
     {
+        console.log(error);
        res.status(401).json({
         messge:"Something went wrong",
         error:error
        })
     }
 }
+
+module.exports={signupController}

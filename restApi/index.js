@@ -1,18 +1,23 @@
 const express=require('express');
 const dotenv=require('dotenv');
 const bodyParser=require('body-parser');
+const multer = require('multer');
 
 const connectDB=require('./connectDB/connectDB')
 const sign_up_route=require('./routes/sign_up_routes')
+const login_route=require('./routes/login_routes')
 dotenv.config();
 
 
 const app=express();
 
+const storage = multer.memoryStorage(); // Store form data in memory
+const upload = multer({ storage: storage });
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/signup',sign_up_route)
+app.use('/api/login',login_route)
 
 
 app.get('/',(req,res)=>{

@@ -1,7 +1,7 @@
 const {isEmail,isValidPassword}=require('../global_helpers')
 const UserModel=require('../models/userModel')
 
-async function  authValidation({name,username,email,password})
+async function  signupValidation({name,username,email,password})
 { 
    let is_error=false;
    let error_message=[];
@@ -37,4 +37,27 @@ async function  authValidation({name,username,email,password})
    }   )
 }
 
-module.exports=authValidation;
+async function  loginValidation({username,password})
+{ 
+   let is_error=false;
+   let error_message=[];
+   if(!username)
+   {
+      is_error=true;
+      error_message.push(`username is required`);
+
+   }
+   if(!password)
+   {
+      is_error=true;
+      error_message.push(`password is required`);
+   }
+   
+   
+   return JSON.stringify({
+       'is_error':is_error,
+       'error_message':error_message
+   }   )
+}
+
+module.exports={signupValidation,loginValidation};
