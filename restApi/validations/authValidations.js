@@ -60,4 +60,39 @@ async function  loginValidation({username,password})
    }   )
 }
 
-module.exports={signupValidation,loginValidation};
+async function  UpdateUserValidation({name,username,email,password,userID})
+{ 
+   let is_error=false;
+   let error_message=[];
+   if(!isEmail(email))
+      {
+         is_error=true;
+        error_message.push(`As Salamu alikum ,${email} is invalid email`)
+      } 
+   if(!isValidPassword(password))
+         {
+            is_error=true;
+           error_message.push(`As Salamu alikum ,Please add One Uppercase , One Special Case in your Password`)
+   }else
+   {
+      const emailExits=await UserModel.findOne({"email":email});
+      if(emailExits && emailExits._ID !==userID)
+         {
+            is_error=true;
+            error_message.push(`As Salamu alikum ,${email} already exits`)  
+         }
+   }
+   const userExits=await UserModel.findOne({"username":username});
+  // console.log(userExits);
+   if(userExits && userExits._ID !==userID)
+   {
+      is_error=true;
+      error_message.push(`As Salamu alikum ,${username} already exits`)  
+   }
+   
+   return JSON.stringify({
+       'is_error':is_error,
+       'error_message':error_message
+   }   )
+}
+module.exports={signupValidation,loginValidation,UpdateUserValidation};

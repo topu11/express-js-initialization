@@ -5,7 +5,7 @@ const connectDB = async ()=>{
        await mongoose.connect(process.env.DB_URL,{
         autoIndex: true
     })
-       console.log("mongo connected")
+       //console.log("mongo connected")
     }catch(error){
         console.log(error); 
     }

@@ -6,6 +6,8 @@ const multer = require('multer');
 const connectDB=require('./connectDB/connectDB')
 const sign_up_route=require('./routes/sign_up_routes')
 const login_route=require('./routes/login_routes')
+const get_user_route=require('./routes/get_user_routes')
+
 dotenv.config();
 
 
@@ -18,13 +20,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/signup',sign_up_route)
 app.use('/api/login',login_route)
-
+app.use('/api/users',get_user_route)
 
 app.get('/',(req,res)=>{
    res.send("Allah akbar")
 })
 const PORT = process.env.PORT || 4000
 app.listen(PORT,()=>{
-    console.log(`running of port ${PORT}`)
+    //console.log(`running of port ${PORT}`)
     connectDB();
 })
