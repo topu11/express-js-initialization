@@ -7,6 +7,7 @@ const connectDB=require('./connectDB/connectDB')
 const sign_up_route=require('./routes/sign_up_routes')
 const login_route=require('./routes/login_routes')
 const get_user_route=require('./routes/get_user_routes')
+const post_type_routes=require('./routes/post_type_routes')
 
 dotenv.config();
 
@@ -21,6 +22,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/signup',sign_up_route)
 app.use('/api/login',login_route)
 app.use('/api/users',get_user_route)
+
+app.use('/api/post/types',post_type_routes)
 
 app.get('/',(req,res)=>{
    res.send("Allah akbar")
