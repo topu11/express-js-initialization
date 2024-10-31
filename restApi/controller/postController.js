@@ -1,17 +1,17 @@
-const postTypeModel = require('../models/postTypeModel')
-const {postTypeModelValidationInsert,UpdatePostTypeValidation} = require('../validations/postValidations')
+const postModel = require('../models/postModel')
+const {postValidationInsert,UpdatePostValidation} = require('../validations/postValidations')
 const mongoose = require('mongoose');
 
 
 
 
 
-const addPostType=async (req, res, next)=>{
+const addPost=async (req, res, next)=>{
     const session = await mongoose.startSession();
     try
     {
         session.startTransaction();
-        const validated=JSON.parse(await postTypeModelValidationInsert(req.body));
+        const validated=JSON.parse(await postValidationInsert(req.body));
         //console.log(validated);
          if(validated.is_error)
          {
@@ -19,20 +19,28 @@ const addPostType=async (req, res, next)=>{
             res.status(422).json({ messge:"Something went wrong",error:validated.error_message });
          }else
          {
+          
+            ////////////////
            
+
+
+
+            //////////////////
+
+
             const {postType}=req.body;
-            const postTypeCreated=await postTypeModel({
+            const postCreated=await postModel({
                 post_type:postType,
            
             })
             
-            await postTypeCreated.save({ session }); 
+            await postCreated.save({ session }); 
 
-            if(postTypeCreated)
+            if(postCreated)
             {
                 res.status(201).json({
                     message:`As Salamu alikum ,${postType} is created succesfully`,
-                    postTypeCreated
+                    postCreated
                 });
             }
             await session.commitTransaction();
@@ -158,33 +166,5 @@ const getSinglePostTypeByID = async (req, res, next) => {
         })
     }
 }
-const DeleteUser = async (req, res, next) => {
-    try {
 
-        const userID = req.params.userID;
-        
-        const user = await UserModel.findById(userID);
-        if (!user) {
-            res.status(200).json({
-                messge: "user is not found",
-                user: user
-            })
-        } else {
-            const deletedUser = await UserModel.findByIdAndDelete(userID);
-            res.status(200).json({
-                messge: "User Account Delete Successfully",
-                deletedUser: deletedUser
-            })
-            
-        }
-
-
-    } catch (error) {
-       console.log(error)
-        res.status(500).json({
-            messge: "Something went wrong",
-            error: error
-        })
-    }
-}
-module.exports = { addPostType,getAllPosttypes, updatePostType,getSinglePostTypeByID }
+module.exports = { addPost,getAllPosttypes, updatePostType,getSinglePostTypeByID }

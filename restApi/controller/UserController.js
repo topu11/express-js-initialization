@@ -12,7 +12,7 @@ const getAllUsers = async (req, res, next) => {
 
     } catch (error) {
 
-        res.status(401).json({
+        res.status(500).json({
             messge: "Something went wrong",
             error: error
         })
@@ -39,7 +39,7 @@ const singelUser = async (req, res, next) => {
 
     } catch (error) {
 
-        res.status(401).json({
+        res.status(500).json({
             messge: "Something went wrong",
             error: error
         })
@@ -80,7 +80,7 @@ const updatelUser = async (req, res, next) => {
                     uuser: updatedUser
                 });
             } else {
-                res.status(401).json({
+                res.status(500).json({
                     messge: "Something went wrong",
                 })
             }
@@ -89,7 +89,7 @@ const updatelUser = async (req, res, next) => {
 
     } catch (error) {
        console.log(error)
-        res.status(401).json({
+        res.status(500).json({
             messge: "Something went wrong",
             error: error
         })
@@ -118,7 +118,7 @@ const DeleteUser = async (req, res, next) => {
 
     } catch (error) {
        console.log(error)
-        res.status(401).json({
+        res.status(500).json({
             messge: "Something went wrong",
             error: error
         })

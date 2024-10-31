@@ -1,18 +1,6 @@
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
-   post_type: {
-      type: Number,
-      required: true,
-   },
-   post_status: {
-      type: Number,
-      required: true,
-   },
-   post_category: {
-      type: [Number],
-      required: true,
-   },
    post_title: {
       type: String,
       required: true,
@@ -22,24 +10,25 @@ const postSchema = new mongoose.Schema({
       type: String,
       required: true
    },
-   post_thumbnail: {
+   featureImage: {
       type: String, // Path to the image
       required: true
    },
-   gallery_images: {
+   galleryImages: {
       type: [String], // Array of image paths
       default: []
    },
-   author_id: {
-      type: Number, // Storing as Number to hold big integers
-      required: true
-   }
+   authorID: {
+      type: mongoose.Schema.Types.ObjectId, ref: 'users' 
+   },
+   categoryIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'postcategories' }], 
+   postTypeId: { type: mongoose.Schema.Types.ObjectId, ref: 'posttypemodels' }
 },
    {
       timestamps: true
    })
 
 
-const userModel = mongoose.model("postSchema", postSchema)
+const postModel = mongoose.model("Post", postSchema)
 
-module.exports = userModel
+module.exports = postModel

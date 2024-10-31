@@ -6,15 +6,17 @@ const postCategoriesSchema = new mongoose.Schema({
       required: true,
    },
    parent_id: {
-      type: Number,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "postCategories",
       required: false,
-   }
+      default:null
+   } 
 },
    {
       timestamps: true
    })
 
 
-const userModel = mongoose.model("postCategoriesSchema", postCategoriesSchema)
+const userModel = mongoose.model("postCategories", postCategoriesSchema)
 
 module.exports = userModel
