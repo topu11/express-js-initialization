@@ -22,7 +22,7 @@ const postSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId, ref: 'users' 
    },
    categoryIds: [{ type: mongoose.Schema.Types.ObjectId, ref: 'postcategories' }], 
-   postTypeId: { type: mongoose.Schema.Types.ObjectId, ref: 'posttypemodels' }
+   postTypeId: { type: mongoose.Schema.Types.ObjectId, ref: 'posttype' }
 },
    {
       timestamps: true
